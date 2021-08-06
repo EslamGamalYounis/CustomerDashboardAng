@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CustomersDataComponent } from './customers-data/customers-data.component';
 import { CustomerComponent } from './customer/customer.component';
+import { CustomerPaginationService } from './services/customer-pagination.service';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes:Routes=[
   {path:'home',component:HomeComponent},
@@ -24,10 +27,15 @@ const routes:Routes=[
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    CustomerPaginationService,
+    HttpClientModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

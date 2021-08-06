@@ -1,11 +1,11 @@
 
 export class Customer{
-  public CstId:Number;
-  public CstName:string;
+  public cstId:Number;
+  public cstName:string;
 
   constructor(CstId,CstName) {
-    this.CstId= CstId;
-    this.CstName =CstName;
+    this.cstId= CstId;
+    this.cstName =CstName;
 
   }
 }

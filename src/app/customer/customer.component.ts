@@ -8,7 +8,7 @@ import { Customer } from './../classes/Customer';
 })
 export class CustomerComponent implements OnInit {
 
-  @Input() custome:Customer;
+  @Input() customer:Customer;
   constructor() { }
 
   ngOnInit(): void {
