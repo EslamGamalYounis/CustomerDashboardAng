@@ -32,8 +32,8 @@ export class CustomersDataComponent implements OnInit {
     this.getCustomers(event);
   }
 
-  onSearchClick(){
-    this.CustomerService.getCustomers(this.searchText.trim(), 1, 20)
+  getCustomers(pageNumber: number = 1) {
+    this.CustomerService.getCustomers(this.searchText.trim(), pageNumber, 20)
       .subscribe((response: PaginatedResult<Customer[]>) => {
         this.customers = response.result;
         this.config = {
@@ -48,8 +48,8 @@ export class CustomersDataComponent implements OnInit {
       );
   }
 
-  getCustomers(pageNumber: number = 1) {
-    this.CustomerService.getCustomers(this.searchText.trim(), pageNumber, 20)
+  onSearchClick(){
+    this.CustomerService.getCustomers(this.searchText.trim(), 1, 20)
       .subscribe((response: PaginatedResult<Customer[]>) => {
         this.customers = response.result;
         this.config = {
