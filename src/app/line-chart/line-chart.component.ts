@@ -7,15 +7,13 @@ import { CountPerMonthAndYear } from './../classes/CountPerMonthAndYear';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit , OnDestroy ,OnChanges {
 
   constructor(private chartsService:ChartsService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-
   }
   subscriber;
   yearList:number[]=[];
@@ -53,13 +51,13 @@ export class LineChartComponent implements OnInit , OnDestroy ,OnChanges {
     // console.log(this.lineChartData[0].data[0]);
     // console.log(typeof this.lineChartData[0].data[0]);
 
-    this.getCountPerMonthsPerYear(new Date().getFullYear()-1);
+    this.getCountPerMonthsPerYear(new Date().getFullYear());
   }
 
   getCountPerMonthsPerYear(year:number){
       this.subscriber = this.chartsService.getCountMonthsPerYear(year).subscribe(
         (data:CountPerMonthAndYear[])=>{
-          this.countPerMonthAndYear = data;
+          this.countPerMonthAndYear = data.slice();
 
           if(this.countPerMonthAndYear !=null){
           this.countPerMonthAndYear.forEach(item=>{
@@ -130,6 +128,7 @@ export class LineChartComponent implements OnInit , OnDestroy ,OnChanges {
           console.log(error);
         }
       )
+
   }
 
   changedYear(year){
