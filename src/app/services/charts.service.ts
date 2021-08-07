@@ -18,4 +18,8 @@ export class ChartsService {
   getServicesCountsByName(serviceName:string){
     return this.httpClient.get("http://localhost:51329/api/customer/count/"+serviceName)
   }
+
+  getCountMonthsPerYear(year:number){
+    return this.httpClient.get("http://localhost:51329/api/customer/count/year/"+year)
+  }
 }

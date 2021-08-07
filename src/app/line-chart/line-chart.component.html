@@ -1,11 +1,29 @@
-<div class="chart-wrapper">
-  <canvas baseChart
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [colors]="lineChartColors"
-      [legend]="lineChartLegend"
-      [chartType]="lineChartType"
-      [plugins]="lineChartPlugins">
-  </canvas>
+<select id="yearSelection" (change)="changedYear($event.target.value)" >
+  <option *ngFor="let yearitem of yearList" [selected]="yearitem ==2020">
+    {{yearitem}}
+  </option>
+</select>
+<div *ngIf="countPerMonthAndYear; else elseBlock">
+  <div class="chart-wrapper">
+    <canvas baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
 </div>
+<ng-template #elseBlock>
+  <div  class="border border-dark border-2 mb-1 p-2 w-75 rounded text-danger alert mt-2 text-center">we do not
+    have data for this year ... please change this year</div>
+</ng-template>
+
+<br>
+<br>
+<hr>
+<br>
+
+
