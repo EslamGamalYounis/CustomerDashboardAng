@@ -9,6 +9,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { CustomerPaginationService } from './services/customer-pagination.service';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
 
 const routes:Routes=[
   {path:'home',component:HomeComponent},
@@ -23,14 +26,17 @@ const routes:Routes=[
     AppComponent,
     HomeComponent,
     CustomersDataComponent,
-    CustomerComponent
+    CustomerComponent,
+    PieChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule
   ],
   providers: [
     CustomerPaginationService,
