@@ -59,6 +59,8 @@ export class LineChartComponent implements OnInit , OnDestroy ,OnChanges {
         (data:CountPerMonthAndYear[])=>{
           this.countPerMonthAndYear = data.slice();
 
+          let initData:ChartDataSets[] = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Customer Count Per Months And Year' }];
+          this.lineChartData = initData ;
           if(this.countPerMonthAndYear !=null){
           this.countPerMonthAndYear.forEach(item=>{
             switch(item.month){
