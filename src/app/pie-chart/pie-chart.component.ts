@@ -4,6 +4,7 @@ import { Label, SingleDataSet, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 import { Service } from './../classes/Service';
 import { ChartsService } from '../services/charts.service';
 import { element } from 'protractor';
+import { CountsPerServiceName } from './../classes/CountsPerServiceName';
 
 @Component({
   selector: 'app-pie-chart',
@@ -13,6 +14,7 @@ import { element } from 'protractor';
 export class PieChartComponent implements OnInit,OnDestroy {
 
   serivces:Service[];
+  resultCountPerServiceName:CountsPerServiceName[];
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -47,57 +49,31 @@ export class PieChartComponent implements OnInit,OnDestroy {
       console.log(error)
     });
 
-    this.subcriber =this.chartsService.getServicesCountsByName('WIFI').subscribe(
-      (data:number)=>{
-        this.pieChartData.push(data);
-      },
-      (error)=>{
-         console.log(error);
-      }
-    );
-
-    this.subcriber =this.chartsService.getServicesCountsByName('4G').subscribe(
-      (data:number)=>{
-        this.pieChartData.push(data);
-      },
-      (error)=>{
-         console.log(error);
-      }
-    );
-
-    this.subcriber =this.chartsService.getServicesCountsByName('VDSL').subscribe(
-      (data:number)=>{
-        this.pieChartData.push(data);
-      },
-      (error)=>{
-         console.log(error);
-      }
-    );
-
-    this.subcriber =this.chartsService.getServicesCountsByName('ADSL').subscribe(
-      (data:number)=>{
-        this.pieChartData.push(data);
-      },
-      (error)=>{
-         console.log(error);
-      }
-    );
-  //this.getCountPerService();
-  }
-
-  getCountPerService(){
-    for(let i=0;i<this.pieChartLabels.length;i++){
-      this.chartsService.getServicesCountsByName(this.pieChartLabels[i].toString()).subscribe(
-        (data:number)=>{
-          this.pieChartData.push(data);
-        },
-        (error)=>{
-           console.log(error);
+    this.subcriber =this.chartsService.getServicesCountsByName().subscribe(
+      (data)=>{
+        this.resultCountPerServiceName= data;
+        this.resultCountPerServiceName.forEach(item =>{
+            this.pieChartData.push(item.count);
         }
-      );
-    }
+        )
+      },
+      (error)=>{
+         console.log(error);
+      }
+    );
+
   }
 
-
-
+  // getCountPerService(){
+  //   for(let i=0;i<this.pieChartLabels.length;i++){
+  //     this.chartsService.getServicesCountsByName().subscribe(
+  //       (data)=>{
+  //         this.pieChartData =data;
+  //       },
+  //       (error)=>{
+  //          console.log(error);
+  //       }
+  //     );
+  //   }
+  // }
 }

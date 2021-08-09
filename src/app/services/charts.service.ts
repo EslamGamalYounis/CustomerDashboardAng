@@ -2,24 +2,29 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Service } from './../classes/Service';
+import { ApiUrl } from './../classes/ApiURL';
+import { CountsPerServiceName } from './../classes/CountsPerServiceName';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartsService {
   services:Service[];
-  constructor(private httpClient: HttpClient) { }
+  apiUrl:ApiUrl =new ApiUrl();
+  constructor(private httpClient: HttpClient) {
+
+  }
 
   getServices(){
     return this.httpClient.get<Service[]>(
-      "http://localhost:51329/api/service");
+      this.apiUrl.controllerNameArr.get("serviceNames"));
   }
 
-  getServicesCountsByName(serviceName:string){
-    return this.httpClient.get("http://localhost:51329/api/customer/count/"+serviceName)
+  getServicesCountsByName(){
+    return this.httpClient.get<CountsPerServiceName[]>(this.apiUrl.controllerNameArr.get("customerCountPerService"))
   }
 
   getCountMonthsPerYear(year:number){
-    return this.httpClient.get("http://localhost:51329/api/customer/count/year/"+year)
+    return this.httpClient.get(this.apiUrl.controllerNameArr.get("customerCountPerYear")+year)
   }
 }
