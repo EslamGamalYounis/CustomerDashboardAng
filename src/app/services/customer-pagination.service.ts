@@ -4,6 +4,7 @@ import { Customer } from './../classes/Customer';
 import { Observable } from "rxjs";
 import { PaginatedResult } from '../classes/Pagination';
 import { map, catchError } from 'rxjs/operators';
+import { ApiUrl } from './../classes/ApiURL';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { map, catchError } from 'rxjs/operators';
 export class CustomerPaginationService {
 
   customers:Customer[];
+  apiUrl:ApiUrl=new ApiUrl();
   constructor(private httpClient: HttpClient) { }
 
   getCustomers(searchQuery?: string, pageNumber?, pageSize?): Observable<PaginatedResult<Customer[]>> {
@@ -30,7 +32,7 @@ export class CustomerPaginationService {
     }
 
     return this.httpClient.get<Customer[]>(
-      "http://localhost:51329/api/customer",
+      this.apiUrl.controllerNameArr.get("customerPaginateList"),
       { responseType: "json", observe: 'response', params })
       .pipe(
         map(res => {

@@ -1,7 +1,7 @@
 
 export class CountPerMonthAndYear{
   public count:number;
-  public month:string;
+  public month:number;
 
   constructor(count,month) {
     this.count= count;

@@ -62,68 +62,12 @@ export class LineChartComponent implements OnInit , OnDestroy ,OnChanges {
           let initData:ChartDataSets[] = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Customer Count Per Months And Year' }];
           this.lineChartData = initData ;
           if(this.countPerMonthAndYear !=null){
+          let x:number = 0;
           this.countPerMonthAndYear.forEach(item=>{
-            switch(item.month){
-              case "January":{
-                this.lineChartData[0].data[0] = item.count;
-                break;
-              }
+              this.lineChartData[0].data[x] = item.count;
+              x++;
+          })
 
-              case "February":{
-                this.lineChartData[0].data[1] = item.count;
-                break;
-              }
-
-              case "March":{
-                this.lineChartData[0].data[2] = item.count;
-                break;
-              }
-
-              case "April":{
-                this.lineChartData[0].data[3] = item.count;
-                break;
-              }
-
-              case "May":{
-                this.lineChartData[0].data[4] = item.count;
-                break;
-              }
-
-              case "June":{
-                this.lineChartData[0].data[5] = item.count;
-                break;
-              }
-
-              case "July":{
-                this.lineChartData[0].data[6] = item.count;
-                break;
-              }
-
-              case "August":{
-                this.lineChartData[0].data[7] = item.count;
-                break;
-              }
-
-              case "September":{
-                this.lineChartData[0].data[8] = item.count;
-                break;
-              }
-
-              case "October":{
-                this.lineChartData[0].data[9] = item.count;
-                break;
-              }
-
-              case "November":{
-                this.lineChartData[0].data[10] = item.count;
-                break;
-              }
-
-              case "December":{
-                this.lineChartData[0].data[11] = item.count;
-                break;
-              }
-            }})
           }
         },
         (error)=>{
